@@ -10,5 +10,5 @@ metadata:
 managedNodeGroups:
 - name: spot
   desiredCapacity: 2
-  instanceTypes: ["t2.micro","t2.small","t3.micro"]
+  instanceTypes: ["m5.large","t3.small", "t3.medium","c5.large"]
   spot: true
