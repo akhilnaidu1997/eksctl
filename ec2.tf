@@ -1,7 +1,7 @@
 resource "aws_instance" "k8s" {
   ami           = local.ami_id
   instance_type = "t2.micro"
-  user_data = ("workstattion.sh")
+  user_data = file("workstattion.sh")
   iam_instance_profile = aws_iam_instance_profile.eks_role_profile.name
 
   root_block_device {
