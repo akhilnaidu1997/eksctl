@@ -19,3 +19,17 @@ PLATFORM=$(uname -s)_$ARCH
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
+
+git clone https://github.com/akhilnaidu1997/eksctl.git
+chown ec2-user:ec2-user -R eksctl
+cd eksctl
+eksctl create cluster --config-file=eks.yaml
+
+if [ $? eq 0 ]; then
+    cd ..
+    kubectl create ns roboshop
+    kubectl config --set-context --current --namespace=roboshop
+else
+    echo "Failed to create cluster"
+fi
+
