@@ -1,7 +1,7 @@
 resource "aws_instance" "k8s" {
   ami           = local.ami_id
   instance_type = "t2.micro"
-  user_data = file("workstattion.sh")
+  user_data = file("newfile.sh")
   iam_instance_profile = aws_iam_instance_profile.eks_role_profile.name
 
   root_block_device {
@@ -9,22 +9,6 @@ resource "aws_instance" "k8s" {
     volume_type = "gp3"
     delete_on_termination = true
     encrypted = false
-  }
-
-  connection {
-    type     = "ssh"
-    user     = "ec2-user"
-    password = "DevOps321"
-    host     = self.public_ip
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "git clone https://github.com/akhilnaidu1997/eksctl.git",
-      "cd eksctl",
-      "eksctl create cluster --config-file=eks.yaml"
-    ]
-    on_failure = continue
   }
 
   tags = {
