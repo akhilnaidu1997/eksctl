@@ -15,7 +15,7 @@ resource "aws_instance" "k8s" {
     type     = "ssh"
     user     = "ec2-user"
     password = "DevOps321"
-    host     = self.private_ip
+    host     = self.public_ip
   }
 
   provisioner "remote-exec" {
