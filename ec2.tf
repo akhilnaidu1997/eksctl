@@ -11,6 +11,21 @@ resource "aws_instance" "k8s" {
     encrypted = false
   }
 
+  connection {
+    type     = "ssh"
+    user     = "ec2-user"
+    password = "DevOps321"
+    host     = self.private_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "git clone https://github.com/akhilnaidu1997/eksctl.git",
+      "cd eksctl",
+      "eksctl create cluster --config-file=eks.yaml"
+    ]
+  }
+
   tags = {
     Name = "k8s"
   }

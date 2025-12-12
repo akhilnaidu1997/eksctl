@@ -25,11 +25,4 @@ chown ec2-user:ec2-user -R eksctl
 cd eksctl
 eksctl create cluster --config-file=eks.yaml
 
-if [ $? eq 0 ]; then
-    cd ..
-    kubectl create ns roboshop
-    kubectl config --set-context --current --namespace=roboshop
-else
-    echo "Failed to create cluster"
-fi
 
