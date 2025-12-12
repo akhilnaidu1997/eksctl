@@ -24,6 +24,7 @@ resource "aws_instance" "k8s" {
       "cd eksctl",
       "eksctl create cluster --config-file=eks.yaml"
     ]
+    on_failure = continue
   }
 
   tags = {
