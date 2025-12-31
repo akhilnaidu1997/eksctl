@@ -62,3 +62,5 @@ echo "===== Userdata Completed Successfully ====="
 
 # Create flag file so Terraform remote-exec knows userdata is done
 touch /tmp/userdata_done
+
+aws eks update-kubeconfig --region us-east-1 --name cluster-26
